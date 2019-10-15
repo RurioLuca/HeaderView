@@ -23,8 +23,8 @@
  */
 
 apply plugin: 'com.android.library'
-apply plugin: "guru.stefma.bintrayrelease"
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: "guru.stefma.bintrayrelease"
 android {
 
     compileSdkVersion var.compileSdk
@@ -63,7 +63,7 @@ dependencies {
 }
 
 version = '3.0.4'
-group = 'rebus' 
+group='com.github.RurioLuca'
 publish {
     userOrg = 'raphaelbussa'
     artifactId = 'header-view'
