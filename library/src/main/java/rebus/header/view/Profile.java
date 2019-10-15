@@ -29,13 +29,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.Spanned;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.RestrictTo;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
@@ -76,13 +76,19 @@ public class Profile implements Parcelable {
     }
 
     private Profile(Parcel in) {
-        id = in.readInt();
-        avatarUri = (Uri) in.readValue(Uri.class.getClassLoader());
-        avatarRes = in.readInt();
-        backgroundUri = (Uri) in.readValue(Uri.class.getClassLoader());
-        backgroundRes = in.readInt();
-        username = (Spanned) in.readValue(Spanned.class.getClassLoader());
-        email = (Spanned) in.readValue(Spanned.class.getClassLoader());
+        if (in != null) {
+            id = in.readInt();
+            if (in.readValue(Uri.class.getClassLoader()) != null) {
+                avatarUri = (Uri) in.readValue(Uri.class.getClassLoader());
+                backgroundUri = (Uri) in.readValue(Uri.class.getClassLoader());
+            }
+            avatarRes = in.readInt();
+            backgroundRes = in.readInt();
+            if (in.readValue(Spanned.class.getClassLoader()) != null) {
+                username = (Spanned) in.readValue(Spanned.class.getClassLoader());
+                email = (Spanned) in.readValue(Spanned.class.getClassLoader());
+            }
+        }
     }
 
     int getId() {
